@@ -62,11 +62,12 @@ modules:
       - -DWITH_TESTS=OFF
       - -DCMAKE_INSTALL_LIBDIR=lib
       - -DKPXC_FEATURE_UPDATES=OFF
+      - -DWITH_KEYUTILS=OFF
     sources:
       - type: git
-        url: https://github.com/keepassxreboot/keepassxc.git
-        tag: 2.8.0
-        commit: 1c2f23ef5914c0f442a00533def1689857afb5a7
+        url: https://github.com/Skyb0rg007/keepassxc.git
+        # tag: 2.8.0
+        commit: 1e1941820e05e0734cb9b3a77ae017632e81bc86
     post-install:
       - install -Dm755 ./utils/keepassxc-flatpak-wrapper.sh /app/bin/keepassxc-wrapper
       - |
@@ -143,15 +144,3 @@ modules:
                 sha256: 911ace20f90d068ca0e4dda6d0e4f0f81e52e52f2dd4f4004c721e253412e82d
             cleanup:
               - '*'
-
-      - name: keyutils
-        buildsystem: simple
-        build-commands:
-          - make PREFIX='/app' SBINDIR='/app/bin' BINDIR='/app/bin' LIBDIR='/app/lib' USRLIBDIR='/app/lib'
-                  SHAREDIR='/app/share/keyutils' MANDIR='/app/share/man' INCLUDEDIR='/app/include'
-                  install
-        sources:
-          - type: git
-            tag: v1.6.3
-            commit: cb3bb194cca88211cbfcdde2f10c0f43c3fb8ec3
-            url: https://git.kernel.org/pub/scm/linux/kernel/git/dhowells/keyutils.git
